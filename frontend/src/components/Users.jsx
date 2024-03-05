@@ -9,7 +9,7 @@ export const Users = ({username}) => {
     const [filter, setFilter] = useState("");
     //debouncing add karo
     useEffect(() => {
-        axios.get("http://localhost:3000/api/v1/user/bulk?filter=" + filter)
+        axios.get("https://payment-app-fvkc.onrender.com/api/v1/user/bulk?filter=" + filter)
             .then(response => {
                 setUsers(response.data.user.filter(user=> user.username !== username))
             })

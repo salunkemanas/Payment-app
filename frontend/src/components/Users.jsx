@@ -14,6 +14,7 @@ export const Users = () => {
                 setUsers(response.data.user)
             })
     }, [filter])
+    
     // maybe write another function to filter the users so that we dont se our own name here 
 
     return <>

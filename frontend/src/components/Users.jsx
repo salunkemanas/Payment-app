@@ -4,18 +4,17 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 
-export const Users = () => {
+export const Users = ({username}) => {
     const [users, setUsers] = useState([]);
     const [filter, setFilter] = useState("");
     //debouncing add karo
     useEffect(() => {
         axios.get("http://localhost:3000/api/v1/user/bulk?filter=" + filter)
             .then(response => {
-                setUsers(response.data.user)
+                setUsers(response.data.user.filter(user=> user.username !== username))
             })
-    }, [filter])
+    }, [filter, username])
     
-    // maybe write another function to filter the users so that we dont se our own name here 
 
     return <>
         <div className="font-bold mt-6 text-lg">
@@ -27,7 +26,7 @@ export const Users = () => {
             }} type="text" placeholder="Search users..." className="w-full px-2 py-1 border rounded border-slate-200"></input>
         </div>
         <div>
-            {users.map(user => <User user={user} />)}
+            {users.map(user => <User key={user.username} user={user} />)}
         </div>
     </>
 }

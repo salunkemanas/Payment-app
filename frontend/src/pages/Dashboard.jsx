@@ -9,7 +9,7 @@ export const Dashboard = () => {
     const [lastName, SetlastName] = useState("");
     const [balance, Setbalance] = useState("");
     useEffect(()=>{
-        axios("http://localhost:3000/api/v1/account/balance",{
+        axios("https://payment-app-fvkc.onrender.com/api/v1/account/balance",{
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             }

@@ -53,11 +53,16 @@ export const SendMoney = () => {
                         }).then((res)=>{
                             if(res.data.message === "Transfer successfull"){
                                 console.log("Transfer successfull")
-                            }
+                                navigate('/sent')
+                            }   
                         }).catch((e)=>{
-                            console.log(e)
+                            if (e.response && e.response.status === 400) {
+                                navigate('/failed', { state: { errorMessage: e.message } });
+                                console.log(e.message);
+                            } else {
+                                console.log(e.message);
+                            }
                         })
-                        navigate('/sent')
                     }} className="justify-center rounded-md text-sm font-medium ring-offset-background transition-colors h-10 px-4 py-2 w-full bg-green-500 text-white">
                         Initiate Transfer
                     </button>
